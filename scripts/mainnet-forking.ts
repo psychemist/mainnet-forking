@@ -16,7 +16,7 @@ async function main() {
     const amountInMax = ethers.parseUnits("1000", 6);
 
     const USDC_Contract = await ethers.getContractAt("IERC20", USDC, impersonatedSigner);
-    const DAI_Contract = await ethers.getContractAt("IERC20", DAI);
+    const DAI_Contract = await ethers.getContractAt("IERC20", DAI, impersonatedSigner);
 
     const ROUTER = await ethers.getContractAt("IUniswapV2Router", ROUTER_ADDRESS, impersonatedSigner);
 
@@ -50,7 +50,7 @@ async function main() {
     const amountADesired = ethers.parseUnits("10", 18);
     const amountBDesired = ethers.parseUnits("10", 6);
     const amountAMin = ethers.parseUnits("5", 18);
-    const amountBMin = ethers.parseUnits("5", 18);
+    const amountBMin = ethers.parseUnits("5", 6);
 
     await DAI_Contract.approve(ROUTER, amountADesired);
     await USDC_Contract.approve(ROUTER, amountBDesired);
