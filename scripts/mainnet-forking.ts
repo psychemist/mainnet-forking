@@ -47,13 +47,13 @@ async function main() {
 
     // ==== ADD LIQUIDITY === //
 
-    const amountADesired = ethers.parseUnits("10", 18);
-    const amountBDesired = ethers.parseUnits("10", 6);
-    const amountAMin = ethers.parseUnits("5", 18);
-    const amountBMin = ethers.parseUnits("5", 6);
+    const amountADesired = ethers.parseUnits("10", 6);
+    const amountBDesired = ethers.parseUnits("10", 18);
+    const amountAMin = ethers.parseUnits("5", 6);
+    const amountBMin = ethers.parseUnits("5", 18);
 
-    await DAI_Contract.approve(ROUTER, amountADesired);
-    await USDC_Contract.approve(ROUTER, amountBDesired);
+    await USDC_Contract.approve(ROUTER, amountADesired);
+    await DAI_Contract.approve(ROUTER, amountBDesired);
 
     const usdcNewBal = await USDC_Contract.balanceOf(impersonatedSigner.address);
     const daiNewBal = await DAI_Contract.balanceOf(impersonatedSigner.address);
@@ -64,8 +64,8 @@ async function main() {
     console.log("dai balance before adding liquidity", Number(daiNewBal));
 
     await ROUTER.addLiquidity(
-        DAI,
         USDC,
+        DAI,
         amountADesired,
         amountBDesired,
         amountAMin,
@@ -81,7 +81,6 @@ async function main() {
 
     console.log("usdc balance after adding liquidity", Number(usdcNewBalAfter));
     console.log("dai balance after adding liquidity", Number(daiNewBalAfter));
-
 }
 
 // We recommend this pattern to be able to use async/await everywhere
